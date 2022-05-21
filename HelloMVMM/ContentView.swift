@@ -8,9 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+   
+    @ObservedObject private var counterVM:CounterViewModel
+    
+    init(){
+    counterVM = CounterViewModel()
+    }
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack{
+        Text( counterVM.premium ? "PREMIUM" : "")
+        .foregroundColor(Color.green)
+        .frame(width:200 , height: 100)
+        .font(.largeTitle)
+                
+        Text("\(counterVM.value)")
+        .font(.largeTitle)
+        Button("Increment"){
+        counterVM.increment()
+        }
+        }
     }
 }
 
@@ -19,3 +36,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
